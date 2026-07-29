@@ -73,5 +73,88 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require("readline-sync");
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        console.log("Error: Cannot divide by zero.");
+        return null;
+    }
+    return a / b;
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        console.log("Error: Cannot divide by zero.");
+        return null;
+    }
+    return a % b;
+}
+
+function exponentiate(a, b) {
+    return a ** b;
+}
+
+function getNumbers() {
+    const a = readlineSync.questionFloat("Enter first number: ");
+    const b = readlineSync.questionFloat("Enter second number: ");
+    return [a, b];
+}
+
+function main() {
+    let choice;
+    do {
+        console.log("\n============================");
+        console.log("      SIMPLE CALCULATOR     ");
+        console.log("============================");
+        console.log("1. Addition");
+        console.log("2. Subtraction");
+        console.log("3. Multiplication");
+        console.log("4. Division");
+        console.log("5. Modulus");
+        console.log("6. Exponentiation");
+        console.log("7. Quit");
+        choice = readlineSync.questionInt("Select an operation (1-7): ");
+
+        if (choice === 7) {
+            console.log("Goodbye!");
+            break;
+        }
+
+        let result = null;
+        let op = "";
+        const [a, b] = getNumbers();
+
+        switch (choice) {
+            case 1: result = add(a, b);          op = "+";  break;
+            case 2: result = subtract(a, b);     op = "-";  break;
+            case 3: result = multiply(a, b);     op = "*";  break;
+            case 4: result = divide(a, b);       op = "/";  break;
+            case 5: result = modulus(a, b);      op = "%";  break;
+            case 6: result = exponentiate(a, b); op = "**"; break;
+            default: console.log("Error: Invalid choice. Enter 1-7.");
+        }
+
+        if (result !== null && op !== "") {
+            console.log(`Result: ${a} ${op} ${b} = ${result.toFixed(2)}`);
+        }
+
+    } while (choice !== 7);
+}
+
+main();
+
 
 
